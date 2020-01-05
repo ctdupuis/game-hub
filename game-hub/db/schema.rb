@@ -11,18 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200105154144) do
+ActiveRecord::Schema.define(version: 20200105183755) do
 
-  create_table "posts", force: :cascade do |t|
+  create_table "games", force: :cascade do |t|
     t.string  "title"
-    t.string  "author"
-    t.text    "body"
+    t.string  "studio"
+    t.string  "genre"
+    t.text    "description"
     t.integer "user_id"
+    t.integer "studio_id"
+  end
+
+  create_table "studios", force: :cascade do |t|
+    t.string "name"
+    t.text   "users", default: "--- []\n"
+    t.text   "games", default: "--- []\n"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "password"
+    t.string  "username"
+    t.string  "password_digest"
+    t.string  "studio"
+    t.integer "studio_id"
   end
 
 end
