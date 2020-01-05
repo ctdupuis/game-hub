@@ -1,0 +1,7 @@
+<h1>VG Showcase</h1>
+<h2>List of Games</h2>
+<ul>
+<% @games.each do |game| %>
+    <li><a href='/games/<%= game.id %>'><%= game.title %></a></li>
+<% end %>
+</ul>

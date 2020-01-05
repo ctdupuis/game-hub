@@ -13,6 +13,11 @@ class RegistrationsController < ApplicationController
     end
 
     post "/signup" do 
-        binding.pry
+        @company = Studio.find_or_create_by(name: params["studio"])
+        @username = params[:username]
+        @password = params[:password]
+        @user = User.create(username: @username, password: @password, studio: @company)
+        erb :'users/home'
+        # binding.pry
     end
 end

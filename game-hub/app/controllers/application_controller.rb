@@ -10,6 +10,8 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
+    @games = Game.all 
+    @studios = Studio.all
     erb :welcome
   end
 

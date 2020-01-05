@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20200105183755) do
     t.string  "title"
     t.string  "studio"
     t.string  "genre"
+    t.string  "submitted_by"
     t.text    "description"
     t.integer "user_id"
     t.integer "studio_id"
