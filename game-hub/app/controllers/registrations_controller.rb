@@ -5,7 +5,12 @@ class RegistrationsController < ApplicationController
     end
 
     # post "/login" do
-        
+        # @user = User.find_by(:username => params[:username])
+        # if @user != nil && @user.password == params[:password]
+        #     session[:user_id] = @user_id
+        #     redirect 'users/home'
+        # end
+        # redirect 'registrations/signup'
     # end
 
     get "/signup" do
@@ -13,11 +18,15 @@ class RegistrationsController < ApplicationController
     end
 
     post "/signup" do 
-        @company = Studio.find_or_create_by(name: params["studio"])
+        @studio = Studio.find_or_create_by(name: params[:studio])
         @username = params[:username]
         @password = params[:password]
-        @user = User.create(username: @username, password: @password, studio: @company)
-        erb :'users/home'
+        @user = User.find_by(:username => params[:username])
+        if !@user
+            @user = User.create(username: @username, password: @password, studio: @studio)
+            erb :'users/home'
+        end
+        redirect '/signup'
         # binding.pry
     end
 end
