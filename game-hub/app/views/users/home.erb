@@ -1,2 +1,9 @@
-<h1>Welcome, <%= @user.username %></h1>
-<h2>You are currently affiliated with <%= @user.studio.name %></h2>
+<header><h4><a href="/logout">Log Out</a></h4></header>
+<body>
+<% if Helpers.is_logged_in?(session) %>
+      <h1>Welcome <%= Helpers.current_user(session).username %></h1>
+      <h3>You are currently affiliated with: <%= Helpers.current_user(session).studio %></h3>
+    
+<!--       <h4><a href="/logout">Log Out</a></h4> -->
+    <% end %>
+</body>
