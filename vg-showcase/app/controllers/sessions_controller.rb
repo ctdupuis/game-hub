@@ -6,10 +6,13 @@ class SessionsController < ApplicationController
     end
 
     post "/login" do
-        @user = User.find_by(username: params[:username])
+        @current_user = User.find_by(username: params[:username])
         # binding.pry
-        if @user != nil && @user.password == params[:password]
-            session[:user_id] = @user_id
+        if @current_user && @current_user.authenticate(params[:password])
+            session[:user_id] = @current_user.id
+            session[:username] = @current_user.username
+            session[:studio_id] = @current_user.studio_id
+            # binding.pry
             redirect '/users/home'
         end
         redirect '/signup'

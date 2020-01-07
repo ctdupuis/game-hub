@@ -10,18 +10,18 @@ class GamesController < ApplicationController
     end
 
     post "/games/:id" do
-        # binding.pry
         @studio = Studio.find_by(name: params[:studio])
         if !@studio
             @studio = Studio.create(name: params[:studio])
         end
-        @game = Game.create(title: params[:title], genre: params[:genre], description: params[:description], studio_id: @studio.id)
-        #NEED TO SET UP SUBMITTED BY FIELD ONCE PASSWORD NONSENSE IS FIGURED OUT
+        @game = Game.create(title: params[:title], genre: params[:genre], description: params[:description], studio_id: @studio.id, submitted_by: session[:username], user_id: session[:user_id])
         redirect "/games/#{@game.id}"
     end
 
     get "/games/:id" do
         @game = Game.find_by(id: params[:id].to_i)
+        @owner = User.find_by(id: @game.id)
+        # binding.pry
         erb :'games/show'
     end
 
@@ -35,11 +35,15 @@ class GamesController < ApplicationController
         @game.title = params[:title]
         @game.description = params[:description]
         @game.genre = params[:genre]
+        @game.user_id = session[:user_id]
         @game.save
         # binding.pry
         redirect "/games/#{ @game.id }"
         
     end
     
-
+    delete "/games/:id" do
+        Game.destroy(params[:id])
+        redirect "/games"
+    end
 end

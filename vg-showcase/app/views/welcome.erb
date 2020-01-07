@@ -1,5 +1,11 @@
 <div class="container">
-  <header><h1><a href='/signup'>Sign Up</a> or <a href='/login'>Log In</a></h1></header>
+  <header>
+  <% if Helpers.is_logged_in?(session) %>
+  <h1>Welcome, <%= Helpers.current_user(session).username %></h1>
+  <% else %>
+  <h1><a href='/signup'>Sign Up</a> or <a href='/login'>Log In</a></h1>
+  <% end %>
+  </header>
   <div class="col-md-8 col-md-offset-2">
     <h2>VG Showcase</h2>
 

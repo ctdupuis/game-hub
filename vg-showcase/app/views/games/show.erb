@@ -1,4 +1,11 @@
 <h1><%= @game.title %></h1>
-<h2>Developed by <a href='/studios/<%= @game.studio.id %>'><%= @game.studio.name %></a>, Submitted by <%= @game.submitted_by %></h2>
+<h2>Developed by <a href='/studios/<%= @game.studio.id %>'><%= @game.studio.name %></a>, Submitted by <a href="/users/<%= @game.user_id %>"><%= @game.submitted_by %></a></h2>
 <h3>Genre: <%= @game.genre %></h3>
 <h4>Description: <%= @game.description %></h4>
+
+<% if Helpers.is_logged_in?(session) && session[:user_id] == @game.user_id %>
+<form method="post" action="/games/<%= @game.id %>">
+  <input type="hidden" name="_method" value="delete" /><br>
+  <input type="submit" value="Delete this Game"/>
+</form>
+<% end %>

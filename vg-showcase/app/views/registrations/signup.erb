@@ -1,3 +1,6 @@
+<div class="flash">
+<%= flash[:error] %>
+</div>
 <h1>Sign Up</h1>
 <form action="/signup" method="POST">
 <label for='username'>Username: </label>
@@ -6,5 +9,5 @@
 <input type='password' name='password'><br>
 <label for='studio'>Studio: </label>
 <input type='studio' name='studio'>
-<input type='submit'>
+<input type='submit' value="Sign Up">
 </form>
