@@ -10,10 +10,7 @@ class GamesController < ApplicationController
     end
 
     post "/games/:id" do
-        @studio = Studio.find_by(name: params[:studio])
-        if !@studio
-            @studio = Studio.create(name: params[:studio])
-        end
+        @studio = Studio.find_by(id: session[:studio_id])
         @game = Game.create(title: params[:title], genre: params[:genre], description: params[:description], studio_id: @studio.id, submitted_by: session[:username], user_id: session[:user_id])
         redirect "/games/#{@game.id}"
     end
@@ -21,13 +18,16 @@ class GamesController < ApplicationController
     get "/games/:id" do
         @game = Game.find_by(id: params[:id].to_i)
         @owner = User.find_by(id: @game.id)
-        # binding.pry
         erb :'games/show'
     end
 
     get "/games/:id/edit" do
         @game = Game.find_by(id: params[:id].to_i)
-        erb :'games/edit'
+        if session[:user_id] == @game.user_id
+            erb :'games/edit'
+        else
+            redirect "/games/#{@game.id}"
+        end
     end
     
     patch "/games/:id" do
@@ -37,13 +37,12 @@ class GamesController < ApplicationController
         @game.genre = params[:genre]
         @game.user_id = session[:user_id]
         @game.save
-        # binding.pry
         redirect "/games/#{ @game.id }"
         
     end
     
     delete "/games/:id" do
         Game.destroy(params[:id])
-        redirect "/games"
+        redirect "/users/home"
     end
 end

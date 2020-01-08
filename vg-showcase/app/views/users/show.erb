@@ -1,5 +1,5 @@
 <h1>Welcome to <%= @user.username %>'s page!</h1>
-<ul>Games submitted by <%= @user.username %>:
+<ul>Games submitted by <strong><%= @user.username %>:</strong>
 <% @user.games.each do |game| %>
     <li><a href='/games/<%= game.id %>'><%= game.title %></a>
 <% end %>

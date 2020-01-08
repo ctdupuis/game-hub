@@ -4,6 +4,10 @@
 <h4>Description: <%= @game.description %></h4>
 
 <% if Helpers.is_logged_in?(session) && session[:user_id] == @game.user_id %>
+<form method="post" action="/games/<%= @game.id %>/edit">
+  <input type="hidden" name="_method" value="get" /><br>
+  <input type="submit" value="Edit this Game"/>
+</form>
 <form method="post" action="/games/<%= @game.id %>">
   <input type="hidden" name="_method" value="delete" /><br>
   <input type="submit" value="Delete this Game"/>

@@ -1,12 +1,10 @@
 <h1>Add A New Game</h1>
 <form action='/games/new' method='POST'>
 <label for='title'>Title: </label>
-<input type='text' name='title'><br>
+<input type='text' name='title' required><br>
 <label for='genre'>Genre: </label>
-<input type='text' name='genre'><br>
-<label for='studio'>Studio: </label>
-<input type='text' name='studio'><br>
+<input type='text' name='genre' required><br>
 <label for='description'>Description: </label><br>
-<textarea name="description"></textarea><br>
+<textarea name="description" rows=10 cols=50 required></textarea><br>
 <input type="submit">
 </form>

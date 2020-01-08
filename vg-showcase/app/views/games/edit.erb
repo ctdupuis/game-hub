@@ -1,11 +1,11 @@
 <h1>Edit an Existing Game</h1>
-<form action='/games/<%= @game.id %>' method='POST'>
+<form id="edit" action='/games/<%= @game.id %>' method='POST'>
 <input type="hidden" name="_method" value="PATCH">
 <label for='title'>Title: </label>
-<input type='text' name='title' placeholder="<%= @game.title %>"><br>
+<input type='text' name='title' value="<%= @game.title %>" required><br>
 <label for='genre'>Genre: </label>
-<input type='text' name='genre' placeholder="<%= @game.genre %>"><br>
+<input type='text' name='genre' value="<%= @game.genre %>" required><br>
 <label for='description'>Description: </label><br>
-<textarea name="description" placeholder="Tell me about your game"></textarea><br>
+<textarea name="description" rows=10 cols=50 placeholder="<%= @game.description %>" required></textarea><br>
 <input type="submit">
 </form>

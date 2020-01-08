@@ -1,9 +1,11 @@
 <h1>Welcome, <%= @user.username %></h1>
 <h2>You are currently affiliated with <a href='/studios/<%= @user.studio_id %>'><%= @user.studio.name %></a></h2>
 
-<h3><a href='/games/new'>Add A New Game</a></h3>
-<ul><strong>Games submitted by You</strong>
-<% @user.games.each do |game| %>
-    <li><a href='/games/<%= game.id %>'><%= game.title %></a> <a href='/games/<%= game.id %>/edit'>Edit</a></li>
-<% end %>
-</ul>
+<ul><strong>Games submitted by You:</strong>
+    <% @user.games.each do |game| %>
+        <li><a href='/games/<%= game.id %>'><%= game.title %></a></li>
+    <% end %>
+</ul><br>
+<form id="new-game-form" action='/games/new' method='GET'>
+    <input type="submit" value="Add Game">
+</form>

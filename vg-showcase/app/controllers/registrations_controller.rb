@@ -1,17 +1,27 @@
 class RegistrationsController < ApplicationController
 
-    
-
     get "/signup" do
+        @studios = Studio.all
         erb :'/registrations/signup'
     end
 
+    get "/signup2" do
+        @studios = Studio.all
+        erb :'/registrations/signup2'
+    end
+
     post "/signup" do 
-        flash[:error] = "Please try again"
-        if params[:username] =~ /^[A-Z0-9]+$/i
-            @username = params[:username] 
+        flash[:taken] = "Username already exists"
+        flash[:username] = "Username must be at least 4 characters, alphanumeric only"
+        flash[:password] = "Password must be at least 4 characters"
+        @finduser = User.find_by(:username => params[:username])
+        if @finduser
+            redirect '/signup'
+        end
+        if Helpers.validate_user(params[:username]) && Helpers.validate_studio(params[:studio]) && Helpers.validate_length(params[:password])
+            @username = params[:username]
             @password = params[:password]
-            @finduser = User.find_by(:username => params[:username])
+            
             @studio = Studio.find_or_create_by(name: params[:studio])
         else
             redirect '/signup'
@@ -25,6 +35,6 @@ class RegistrationsController < ApplicationController
             redirect '/users/home'
         end
         redirect '/signup'
-        
     end
+    
 end

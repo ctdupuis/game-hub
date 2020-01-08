@@ -81,6 +81,10 @@
     margin-top: 20px;
     padding-top: 20px;
   }
+
+  div.flash {
+    color: blue;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -112,8 +116,9 @@
     font-size: 18px;
     line-height: 24px;
   }
+
+  div.flash {
+    color: blue;
+  }
 }
 
-.flash {
-  background-color: red;
-}
