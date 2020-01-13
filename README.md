@@ -1,3 +1,1 @@
-# TODO
-* get sinatra-flash to work correctly
-* customize css
+VG Showcase is a content sharing app designed for game developers who want to share the games they've created. This app can be used as a marketing tool to help promote new or existing titles, or can even simply be for anyone who loves games to share their content with others.
