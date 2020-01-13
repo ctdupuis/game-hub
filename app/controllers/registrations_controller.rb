@@ -11,11 +11,14 @@ class RegistrationsController < ApplicationController
     end
 
     post "/signup" do 
-        flash[:taken] = "Username already exists"
-        flash[:username] = "Username must be at least 4 characters, alphanumeric only"
-        flash[:password] = "Password must be at least 4 characters"
+        if !Helpers.validate_user(params[:username])
+            flash[:signup] = "Username is invalid. Must be at least 4 characters, alphanumeric only."
+        elsif !Helpers.validate_length(params[:password])
+            flash[:signup] = "Password must be at least 4 characters."
+        end
         @finduser = User.find_by(:username => params[:username])
         if @finduser
+            flash[:signup] = "Username is already taken."
             redirect '/signup'
         end
         if Helpers.validate_user(params[:username]) && Helpers.validate_studio(params[:studio]) && Helpers.validate_length(params[:password])

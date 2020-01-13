@@ -2,7 +2,11 @@
 <h2>Developed by <a href='/studios/<%= @game.studio.id %>'><%= @game.studio.name %></a>, Submitted by <a href="/users/<%= @game.user_id %>"><%= @game.submitted_by %></a></h2>
 <h3>Genre: <%= @game.genre %></h3>
 <h4>Description: <%= @game.description %></h4>
-
+<br>
+<form method="post" action="/games">
+  <input type="hidden" name="_method" value="get" /><br>
+  <input type="submit" value="Back to Games"/>
+</form>
 <% if Helpers.is_logged_in?(session) && session[:user_id] == @game.user_id %>
 <form method="post" action="/games/<%= @game.id %>/edit">
   <input type="hidden" name="_method" value="get" /><br>

@@ -1,16 +1,18 @@
-<h1><%= @studio.name %></h1>
-<div>
-<ul> Games:
-<% @studio.games.each do |game| %>
-    <li><a href='/games/<%= game.id %>'><%= game.title %></a></li>
-<% end %>
-</ul>
-<div>
+<div class="col-md-8 col-md-offset-2">
+    <h1><%= @studio.name %></h1>
+    <div id="studio-show-games">
+        <ul> Games:
+        <% @studio.games.each do |game| %>
+         <li><a href='/games/<%= game.id %>'><%= game.title %></a></li>
+        <% end %>
+        </ul>
+    </div>
+</div>
 <br>
-<div>
+<div id="studio-show-users">
 <ul> Affiliated Users:
 <% @studio.users.each do |user| %>
     <li><a href='/users/<%= user.id %>'><%= user.username %></a></li>
 <% end %>
 </ul>
-<div>
+</div>
